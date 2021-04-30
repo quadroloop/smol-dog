@@ -27,20 +27,23 @@ void setup() {
 }
 
 
-String getValue(String data, char separator, int index)
-{
-    int found = 0;
-    int strIndex[] = { 0, -1 };
-    int maxIndex = data.length() - 1;
-
-    for (int i = 0; i <= maxIndex && found <= index; i++) {
-        if (data.charAt(i) == separator || i == maxIndex) {
-            found++;
-            strIndex[0] = strIndex[1] + 1;
-            strIndex[1] = (i == maxIndex) ? i+1 : i;
-        }
-    }
-    return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+void STAND() {
+  s1.write(159);
+  delay(15);
+   s2.write(18);
+  delay(15);
+   s3.write(115);
+  delay(15);
+   s4.write(50);
+  delay(15);
+   s5.write(57);
+  delay(15);
+   s6.write(180);
+  delay(15);
+   s7.write(43);
+  delay(15);
+   s8.write(18);
+  delay(15);
 }
 
 
@@ -60,29 +63,39 @@ Serial.println(servoID);
 
    if(servoID == "s1"){
     s1.write(servoAngle);
+    delay(200);
    }
     if(servoID == "s2"){
     s2.write(servoAngle);
+    delay(200);
    }
     if(servoID == "s3"){
     s3.write(servoAngle);
+    delay(200);
    }
     if(servoID == "s4"){
     s4.write(servoAngle);
+    delay(200);
    }
     if(servoID == "s5"){
     s5.write(servoAngle);
+    delay(200);
    }
     if(servoID == "s6"){
     s6.write(servoAngle);
+    delay(200);
    }
     if(servoID == "s7"){
     s7.write(servoAngle);
+    delay(200);
    }
     if(servoID == "s8"){
     s8.write(servoAngle);
+    delay(200);
    }
 
+ }else{
+  STAND();
  }
 
 
