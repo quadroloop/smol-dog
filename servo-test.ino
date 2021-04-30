@@ -10,7 +10,6 @@ Servo s6;
 Servo s7;
 Servo s8;
 
-int pos = 0;
 
 void setup() {
   s1.attach(2);
@@ -21,30 +20,70 @@ void setup() {
   s6.attach(7);
   s7.attach(8);
   s8.attach(9);
+
+
+  // initialize serial interface
+  Serial.begin(9600);
 }
 
+
+String getValue(String data, char separator, int index)
+{
+    int found = 0;
+    int strIndex[] = { 0, -1 };
+    int maxIndex = data.length() - 1;
+
+    for (int i = 0; i <= maxIndex && found <= index; i++) {
+        if (data.charAt(i) == separator || i == maxIndex) {
+            found++;
+            strIndex[0] = strIndex[1] + 1;
+            strIndex[1] = (i == maxIndex) ? i+1 : i;
+        }
+    }
+    return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
+
+
 void loop() {
-  for (pos = 0; pos <= 50; pos += 1) {
-    // in steps of 1 degree
-    s1.write(pos);
-    s2.write(pos);
-    s3.write(pos);
-    s4.write(pos);
-    s5.write(pos);
-    s6.write(pos);
-    s7.write(pos);
-    s8.write(pos);
-    delay(10);
-  }
-  for (pos = 50; pos >= 0; pos -= 1) {
-     s1.write(pos);
-    s2.write(pos);
-    s3.write(pos);
-    s4.write(pos);
-    s5.write(pos);
-    s6.write(pos);
-    s7.write(pos);
-    s8.write(pos);
-    delay(10);
-  }
+
+
+
+if (Serial.available() > 0){
+  String jx = Serial.readString();
+
+  String servoID = jx.substring(0,2);
+  String servoAngleValue = jx.substring(3);
+  int servoAngle = servoAngleValue.toInt();
+
+Serial.println(servoID);
+    Serial.println(servoAngle);
+
+   if(servoID == "s1"){
+    s1.write(servoAngle);
+   }
+    if(servoID == "s2"){
+    s2.write(servoAngle);
+   }
+    if(servoID == "s3"){
+    s3.write(servoAngle);
+   }
+    if(servoID == "s4"){
+    s4.write(servoAngle);
+   }
+    if(servoID == "s5"){
+    s5.write(servoAngle);
+   }
+    if(servoID == "s6"){
+    s6.write(servoAngle);
+   }
+    if(servoID == "s7"){
+    s7.write(servoAngle);
+   }
+    if(servoID == "s8"){
+    s8.write(servoAngle);
+   }
+
+ }
+
+
 }
